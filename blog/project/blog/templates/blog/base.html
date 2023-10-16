@@ -1,0 +1,15 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block title %} {% comment %} هنا بحط التايتل وممكن اورثه للمواقع كلها {% endcomment %} {% endblock %}</title>
+    <link href="{% static "css/blog.css" %}" rel="stylesheet">
+  </head>
+  <body>
+    <div id="content">{% block content %} {% comment %} هنا بحط محتوى الموقع بتاعي {% endcomment %} {% endblock %}</div>
+    <div id="sidebar">
+      <h2>My blog</h2>
+      <p>This is my blog.</p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+{% extends "blog/base.html" %}
+{% block title %}My Blog{% endblock %}
+{% block content %}
+<h1>My Blog</h1>
+{% for post in posts %}
+<h2>
+    
+{% comment %} <a href="{% url 'blog:post_detail' post.id %}"> هنا بمرر ال post.id لل link علشان اتحول direct ع ال details {% endcomment %}
+
+<a href="{{ post.get_absolute_url }}">
+{{ post.title }}
+</a>
+</h2>
+<p class="date">
+Published {{ post.publish }} By {{ post.author }}
+</p>
+{{ post.body|truncatewords:30|linebreaks }} {% comment %} هنا دي علشان السطر ميبقاش مطول للاخر ف يكتب لحد 30 كلمه وينزل ع اللي بعده {% endcomment %}
+{% endfor %}
+    {% include "pagination.html"%}
+{% endblock %}
