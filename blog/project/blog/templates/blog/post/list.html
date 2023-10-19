@@ -15,6 +15,6 @@
 Published {{ post.publish }} By {{ post.author }}
 </p>
 {{ post.body|truncatewords:30|linebreaks }} {% comment %} هنا دي علشان السطر ميبقاش مطول للاخر ف يكتب لحد 30 كلمه وينزل ع اللي بعده {% endcomment %}
-{% endfor %}
+    {% endfor %}
     {% include "pagination.html"%}
 {% endblock %}
