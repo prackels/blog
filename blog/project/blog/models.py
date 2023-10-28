@@ -12,6 +12,7 @@ class PublishedManager(models.Manager): # هنا بعمل model لل Status Publ
         return super().get_queryset()\
             .filter(status=Post.Status.PUBLISHED) # هنا بفلتر ال Status علشان اجيب ال Published بس
 
+### Post Model ###
 class Post(models.Model): # The Model of Blog
     class Status(models.TextChoices): # Choice Field Variable
         DRAFT = 'DF', 'Draft' # text choice 'DF'= values 'Draft'= label
@@ -36,6 +37,24 @@ class Post(models.Model): # The Model of Blog
     def get_absolute_url(self):
         return reverse("blog:post_detail", args=[self.publish.year, self.publish.month, self.publish.day,self.slug])
     
+### Comments Model ###
+class Comment(models.Model):
+    post = models.ForeignKey(Post,
+    on_delete=models.CASCADE,
+    related_name='comments') # The Relation attribute name, post.comments.all() to call the comments of post
+    name = models.CharField(max_length=80)
+    email = models.EmailField()
+    body = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    active = models.BooleanField(default=True)
+    class Meta:
+        ordering = ['created']
+        indexes = [
+        models.Index(fields=['created']),
+        ]
+    def __str__(self):
+        return f'Comment by {self.name} on {self.post}'
 
 """
 In Django, all fields are searched, but by placing one field, “Public,” only it is searched for,
